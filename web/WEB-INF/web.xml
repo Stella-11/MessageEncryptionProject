@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>StartSessionServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.StartSessionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnalyzeShortMessageServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.AnalyzeShortMessageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllMessageAnalysis</servlet-name>
+        <servlet-class>za.ac.tut.web.ViewAllMessageAnalysis</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogOutServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.LogOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StartSessionServlet</servlet-name>
+        <url-pattern>/StartSessionServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnalyzeShortMessageServlet</servlet-name>
+        <url-pattern>/AnalyzeShortMessageServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllMessageAnalysis</servlet-name>
+        <url-pattern>/ViewAllMessageAnalysis.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOutServlet</servlet-name>
+        <url-pattern>/LogOutServlet.do</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <context-param>
+        <param-name>comp_name</param-name>
+        <param-value>Siri</param-value>
+    </context-param>
+    <error-page>
+        <exception-type>za.ac.tut.bl.MessageException</exception-type>
+        <location>/invalid_msg_error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/file_not_found_error.jsp</location>
+    </error-page>
+    <security-constraint>
+        <display-name>StudentConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>student</web-resource-name>
+            <description>resources given</description>
+            <url-pattern>/start.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Student Authentication </description>
+            <role-name>student</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/loginerror.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>student can add and view </description>
+        <role-name>student</role-name>
+    </security-role>
+</web-app>
