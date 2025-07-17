@@ -1,4 +1,5 @@
 Message Encryptor Web App
+
 This is a web application that lets you encrypt and decrypt messages easily.
 
 Features:
